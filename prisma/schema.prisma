@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique //@length(min: 4, max: 12)
+  pswd      String   //@length(min: 6, max: 16)
+  email     String   @unique //@length(min: 5, max: 32)
+  admin     Boolean  @default(false)
+  createdAt DateTime @default(now())
+  avatar    String?  //@length(max: 128)
+}
+
+model Material {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique //@length(min: 2, max: 128)
+  value        String   //@length(min: 1, max: 128)
+  amount       Int      @default(1) //@length(min: 0, max: 9999)
+  package      String   //@length(min: 1, max: 64)
+  model        String?  //@length(min: 1, max: 64)
+  manufacturer String?  //@length(min: 1, max: 64)
+  class        String?  //@length(min: 1, max: 64)
+  description  String?  //@length(min: 1, max: 4096)
+  avatar       String?  //@length(max: 128)
+  datasheet    String?  //@length(max: 2048)
+}
