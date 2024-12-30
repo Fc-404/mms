@@ -1,7 +1,9 @@
+"use server";
+
 import { encodingPswd, verifyPswd } from "@/lib/dealAuth";
 import { PrismaClient } from "@prisma/client";
-import md5 from "crypto-js/md5";
 import { cookies } from "next/headers";
+import md5 from "crypto-js/md5";
 
 const prisma = new PrismaClient();
 
@@ -17,7 +19,6 @@ export async function verifyToken() {
       pswd: true,
     },
   });
-  console.log("user", user);
   if (!user) {
     return false;
   }
