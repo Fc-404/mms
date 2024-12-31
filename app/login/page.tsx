@@ -70,14 +70,14 @@ export default function Login() {
       >
         <h1
           className="lg:text-[2.5rem] text-[2rem] text-red-400
-          font-bold mb-12 flex items-center nowrap"
+          font-bold mb-12 flex items-center"
         >
           <Image
             src="/favicon.svg"
             alt="logo"
-            width={64}
-            height={64}
-            className="size-12 mr-4"
+            width={0}
+            height={0}
+            className="sm:size-12 mr-4"
           />
           物料管理系统
         </h1>
