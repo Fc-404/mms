@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { TbLogin2 } from "react-icons/tb";
 import { encodingPswd } from "@/lib/dealAuth";
 import { useRouter } from "next/navigation";
+import { verifyUser } from "../api/verifyToken";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -40,14 +41,11 @@ export default function Login() {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const formdata = new FormData();
-    formdata.append("username", username);
-    formdata.append("password", encodingPswd(password));
-    const res = await fetch("/api/login", {
-      method: "POST",
-      body: formdata,
+    const res = await verifyUser({
+      name: username,
+      pswdHash: encodingPswd(password),
     });
-    if (res.ok) {
+    if (res) {
       toast.success("登录成功");
       const t = Buffer.from(cookie.get("token") as string, "base64").toString();
       cookie.set("token", t.substring(Number(t.slice(-2)), t.length - 2));
